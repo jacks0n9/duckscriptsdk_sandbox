@@ -1,0 +1,8 @@
+[package]
+name = "duckscriptsdk_sandbox"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+duckscript = "0.8.0"
+duckscriptsdk = { version = "0.9.3", default-features = false }
