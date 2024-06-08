@@ -1,4 +1,8 @@
 [package]
+authors=["starryuwu"]
+description="Use the duckscript sdk without worrying about users interacting with what you don't want them to"
+repository="https://github.com/jacks0n9/duckscriptsdk_sandbox.git"
+license="MIT OR Apache-2.0"
 name = "duckscriptsdk_sandbox"
 version = "0.1.0"
 edition = "2021"
