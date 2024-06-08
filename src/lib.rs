@@ -1,5 +1,4 @@
-use duckscript::{types::{command::{Command, CommandResult, Commands}, error::ScriptError, runtime::Context}};
-use duckscriptsdk;
+use duckscript::types::{command::Commands, error::ScriptError};
 pub fn load(commands: &mut Commands)->Result<(),ScriptError>{
     duckscriptsdk::load(commands)?;
     commands.commands.retain(|name,_|{
@@ -10,6 +9,7 @@ pub fn load(commands: &mut Commands)->Result<(),ScriptError>{
         let whitelist = [
             "math",
             "error",
+            "Echo",
             "string",
             "collections",
             "IsCommandDefined",
@@ -29,9 +29,21 @@ pub fn load(commands: &mut Commands)->Result<(),ScriptError>{
             "Noop",
             "test"
         ];
-        return whitelist.contains(&module);
+        whitelist.contains(&module)
     });
     commands.aliases.retain(|_,command_name|commands.commands.get(command_name).is_some());
     Ok(())
 }
 
+#[cfg(test)]
+mod tests{
+    use super::*;
+    use duckscript::{runner, types::runtime::Context};
+
+    #[test]
+    fn test_no_fs(){
+        let mut context=Context::new();
+        load(&mut context.commands).unwrap();
+        assert!(runner::run_script("readfile ./Cargo.toml", context).is_err());
+    }
+}
