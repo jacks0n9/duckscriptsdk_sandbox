@@ -31,7 +31,7 @@ pub fn load(commands: &mut Commands)->Result<(),ScriptError>{
         ];
         whitelist.contains(&module)
     });
-    commands.aliases.retain(|_,command_name|commands.commands.get(command_name).is_some());
+    commands.aliases.retain(|_,command_name|commands.commands.contains_key(command_name));
     Ok(())
 }
 
